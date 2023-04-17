@@ -36,7 +36,7 @@ if (computerSelection == playerSelection) {
 }
 
 while (true) {
-    if ((win + lose) < 5) {
+    if ((win + lose) < 5 && win < 3 && lose < 3) {
         console.log(`You have ${win} wins, ${lose} losses and ${draw} draws`)
         game()
     } else {
