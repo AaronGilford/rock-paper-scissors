@@ -24,9 +24,13 @@ computerSelection = getComputerChoice();
 if (computerSelection == playerSelection) {
     console.log("Draw! You chose the same as the computer")
     draw++
-} else if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors") {
+} else if (playerSelection != "rock" 
+&& playerSelection != "paper" 
+&& playerSelection != "scissors") {
     console.log(`Invalid choice! You wrote ${playerSelection}`)
-} else if (computerSelection == "rock" && playerSelection == "paper" || computerSelection == "paper" && playerSelection == "scissors" || computerSelection === "scissors" && playerSelection == "rock") {
+} else if (computerSelection == "rock" && playerSelection == "paper" 
+|| computerSelection == "paper" && playerSelection == "scissors" 
+|| computerSelection == "scissors" && playerSelection == "rock") {
     console.log(`You win! You chose ${playerSelection} and the computer chose ${computerSelection}`)
     win++
 } else {
