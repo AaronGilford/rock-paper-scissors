@@ -15,10 +15,9 @@ let lose = 0
 let computerSelection
 let playerSelection
 
-function game() {
+function game(e) {
 
-playerSelection = prompt("Rock, Paper or Scissors?")
-playerSelection = playerSelection.toLowerCase();
+playerSelection = e.target.id;
 computerSelection = getComputerChoice();
 
 if (computerSelection == playerSelection) {
@@ -52,12 +51,7 @@ if (computerSelection == playerSelection) {
 }
 }
 
-while (true) {
-    if ((win + lose) < 5 && win < 3 && lose < 3) {
-        console.log(`You have ${win} wins, ${lose} losses and ${draw} draws`)
-        game()
-    } else {
-        console.log(`The final score is: ${win} wins, ${lose} losses and ${draw} draws`)
-        break;
-    }
-}
+let rock = document.querySelector('#rock').addEventListener('click', game);
+let paper = document.querySelector('#paper').addEventListener('click', game);
+let scissors = document.querySelector('#scissors').addEventListener('click', game);
+let gameResult = document.querySelector('#results');
