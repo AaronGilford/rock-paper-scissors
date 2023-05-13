@@ -10,22 +10,26 @@ function getComputerChoice() {
 }
 
 
-let computerSelection
-let playerSelection
-let rock = document.querySelector('#rock').addEventListener('click', game);
-let paper = document.querySelector('#paper').addEventListener('click', game);
-let scissors = document.querySelector('#scissors').addEventListener('click', game);
+let rock = document.querySelector('#rock');
+let paper = document.querySelector('#paper');
+let scissors = document.querySelector('#scissors');
 let gameResult = document.querySelector('#results');
+
+let win = 0
+let draw = 0
+let lose = 0
+let score = document.querySelector('#score');
 
 function game(e) {
 
-playerSelection = e.target.id;
-computerSelection = getComputerChoice();
+let playerSelection = e.target.id;
+let computerSelection = getComputerChoice();
 
 if (computerSelection == playerSelection) {
 
     gameResult.textContent = "Draw! You chose the same as the computer";
     draw++
+    finalScore();
 
 } else if (
     playerSelection != "rock" && 
@@ -34,6 +38,7 @@ if (computerSelection == playerSelection) {
     ){
     
     gameResult.textContent = `Invalid choice! You wrote ${playerSelection}`;
+    finalScore();
 
 } else if (
     computerSelection == "rock" && 
@@ -46,15 +51,45 @@ if (computerSelection == playerSelection) {
 
     gameResult.textContent = `You win! You chose ${playerSelection} and the computer chose ${computerSelection}`
     win++
+    finalScore();
 
 } else {
     gameResult.textContent = `You lose! You chose ${playerSelection} and the computer chose ${computerSelection}`;
     lose++
+    finalScore();
 }
 }
 
-let win = 0
-let draw = 0
-let lose = 0
 
+function finalScore() {
+    if (win < 5 && lose < 5) {
+            score.textContent = `You have ${win} wins, ${lose} losses and ${draw} draws`;
+    } else {
+            score.textContent = `Game over! The final score is: ${win} wins, ${lose} losses and ${draw} draws`;
+            rock.disabled = true;
+            paper.disabled = true;
+            scissors.disabled = true;
+            winOrLose();
+    }
+}
 
+function winOrLose() {
+    if (win === 5) {
+        newP = document.createElement("p");
+        newContent = document.createTextNode("You won!")
+        newP.appendChild(newContent); 
+        let currentP = document.querySelector('#score');
+        document.body.insertBefore(newP, currentP);
+    }
+    else if (lose === 5) {
+        newP = document.createElement("p");
+        newContent = document.createTextNode("You lost!");
+        newP.appendChild(newContent);
+        let currentP = document.querySelector('#score');
+        document.body.insertBefore(newP, currentP);
+    }
+}
+
+rock.addEventListener('click', game);
+paper.addEventListener('click', game);
+scissors.addEventListener('click', game);
