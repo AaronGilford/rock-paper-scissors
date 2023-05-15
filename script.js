@@ -70,26 +70,35 @@ function finalScore() {
             paper.disabled = true;
             scissors.disabled = true;
             winOrLose();
+            restartBtn();
     }
 }
 
 function winOrLose() {
+    let newP = document.createElement("p");
+    let currentP = document.querySelector('#score');
+    let parentDiv = document.querySelector('#parentDiv');
+    let newContent
     if (win === 5) {
-        newP = document.createElement("p");
-        newContent = document.createTextNode("You won!")
-        newP.appendChild(newContent); 
-        let currentP = document.querySelector('#score');
-        document.body.insertBefore(newP, currentP);
+        newContent = document.createTextNode("Congratulations, you won this first to 5 game of rock, paper, scissors!")
     }
     else if (lose === 5) {
-        newP = document.createElement("p");
-        newContent = document.createTextNode("You lost!");
-        newP.appendChild(newContent);
-        let currentP = document.querySelector('#score');
-        document.body.insertBefore(newP, currentP);
+        newContent = document.createTextNode("Sorry! You lost this first to 5 game of rock, paper, scissors! Better luck next time!");
     }
+    newP.appendChild(newContent); 
+    parentDiv.insertBefore(newP, currentP.nextSibling);
+}
+
+function restartBtn() {
+   
+    let restartButton = document.createElement('button');
+    let buttonDiv = document.querySelector('#buttonDiv');
+    let buttonText = document.createTextNode("Restart");
+    restartButton.appendChild(buttonText);
+    buttonDiv.insertBefore(restartButton, scissors.nextSibling);
+    restartButton.addEventListener('click', () => location.reload());
 }
 
 rock.addEventListener('click', game);
 paper.addEventListener('click', game);
-scissors.addEventListener('click', game);
+scissors.addEventListener('click', game); 
